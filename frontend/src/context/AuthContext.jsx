@@ -9,6 +9,11 @@ const initial = stored ? JSON.parse(stored) : { token: null, user: null }
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(initial)
 
+  const register = async (email, password) => {
+    await api.post('/auth/register', { email, password })
+    await login(email, password)
+  }
+
   const login = async (email, password) => {
     const { data } = await api.post('/auth/login', { email, password })
     const next = { token: data.access_token, user: data.user }
@@ -28,6 +33,7 @@ export const AuthProvider = ({ children }) => {
       token: auth.token,
       user: auth.user,
       isAdmin: auth.user?.is_admin || false,
+      register,
       login,
       logout
     }),
