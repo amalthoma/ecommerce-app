@@ -39,3 +39,13 @@ Backend (Render, free):
 6. Set env vars: `DATABASE_URL`, `JWT_SECRET`, `FRONTEND_URL`
 
 Frontend (Vercel): connect repo and set `VITE_API_URL` to your Render URL.
+
+## Production Admin
+
+Create or reset the admin user using environment variables:
+
+```powershell
+$env:ADMIN_EMAIL="admin@example.com"
+$env:ADMIN_PASSWORD="strong-password"
+python -m backend.scripts.create_admin
+```
